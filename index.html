@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <meta name="theme-color" content="#0b111b">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <title>Mis Servicios</title>
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+  <!-- HEADER -->
+  <header class="topbar">
+
+    <div>
+      <div class="eyebrow">
+        TU CONTROL, MÁS SIMPLE
+      </div>
+
+      <h1>Mis Servicios</h1>
+    </div>
+
+    <button class="icon-btn" id="settingsBtn">
+      ⚙
+    </button>
+
+  </header>
+
+
+  <main>
+
+    <!-- MES -->
+    <section class="month-nav">
+
+      <button class="month-arrow" id="prevMonth">
+        ‹
+      </button>
+
+      <strong id="monthLabel"></strong>
+
+      <button class="month-arrow" id="nextMonth">
+        ›
+      </button>
+
+    </section>
+
+
+    <!-- ESTADÍSTICAS -->
+    <section class="stats-grid">
+
+      <div class="stat-card danger">
+
+        <span id="dueCount">
+          0
+        </span>
+
+        <small>
+          Por vencer
+        </small>
+
+      </div>
+
+
+      <div class="stat-card success">
+
+        <span id="paidCount">
+          0
+        </span>
+
+        <small>
+          Pagados
+        </small>
+
+      </div>
+
+
+      <div class="stat-card neutral">
+
+        <span id="overdueCount">
+          0
+        </span>
+
+        <small>
+          Vencidos
+        </small>
+
+      </div>
+
+
+      <div class="stat-card money">
+
+        <span id="pendingTotal">
+          $0
+        </span>
+
+        <small>
+          Total pendiente
+        </small>
+
+      </div>
+
+    </section>
+
+
+    <!-- TÍTULO -->
+    <section class="section-head">
+
+      <h2>
+        Próximos a pagar
+      </h2>
+
+      <button
+        class="link-btn"
+        id="showAllBtn">
+
+        Ver todos
+
+      </button>
+
+    </section>
+
+
+    <!-- SERVICIOS -->
+    <section
+      id="serviceList"
+      class="service-list">
+    </section>
+
+
+    <!-- VACÍO -->
+    <div
+      id="emptyState"
+      class="empty-state hidden">
+
+      <div class="empty-icon">
+        ✓
+      </div>
+
+      <h3>
+        Todo al día
+      </h3>
+
+      <p>
+        No tenés servicios pendientes para este período.
+      </p>
+
+    </div>
+
+  </main>
+
+
+  <!-- NAV INFERIOR -->
+  <nav class="bottom-nav">
+
+    <button
+      class="nav-item active"
+      data-view="home">
+
+      ⌂
+      <span>
+        Inicio
+      </span>
+
+    </button>
+
+
+    <button
+      class="nav-item"
+      data-view="services">
+
+      ☷
+      <span>
+        Servicios
+      </span>
+
+    </button>
+
+
+    <button
+      class="add-main"
+      id="addBtn">
+
+      +
+
+    </button>
+
+
+    <button
+      class="nav-item"
+      data-view="history">
+
+      ◷
+      <span>
+        Historial
+      </span>
+
+    </button>
+
+
+    <button
+      class="nav-item"
+      data-view="more">
+
+      •••
+      <span>
+        Más
+      </span>
+
+    </button>
+
+  </nav>
+
+</div>
+
+
+<!-- MODAL AGREGAR SERVICIO -->
+
+<div
+  class="modal-backdrop hidden"
+  id="modalBackdrop">
+
+  <div
+    class="modal"
+    role="dialog"
+    aria-modal="true">
+
+    <button
+      class="close-btn"
+      id="closeModal">
+
+      ×
+
+    </button>
+
+
+    <h2 id="modalTitle">
+      Agregar servicio
+    </h2>
+
+
+    <form id="serviceForm">
+
+      <input
+        type="hidden"
+        id="serviceId">
+
+
+      <label>
+
+        Nombre del servicio
+
+        <input
+          id="name"
+          required
+          placeholder="Ej: Internet">
+
+      </label>
+
+
+      <label>
+
+        Proveedor
+
+        <input
+          id="provider"
+          placeholder="Ej: Personal">
+
+      </label>
+
+
+      <div class="two-col">
+
+        <label>
+
+          Monto
+
+          <input
+            id="amount"
+            type="number"
+            min="0"
+            step="0.01"
+            required
+            placeholder="35000">
+
+        </label>
+
+
+        <label>
+
+          Vencimiento
+
+          <input
+            id="dueDate"
+            type="date"
+            required>
+
+        </label>
+
+      </div>
+
+
+      <label>
+
+        Repetición
+
+        <select id="repeat">
+
+          <option value="none">
+            Una sola vez
+          </option>
+
+          <option value="monthly">
+            Mensual
+          </option>
+
+          <option value="bimonthly">
+            Cada 2 meses
+          </option>
+
+          <option value="quarterly">
+            Trimestral
+          </option>
+
+          <option value="yearly">
+            Anual
+          </option>
+
+        </select>
+
+      </label>
+
+
+      <label>
+
+        Notas
+
+        <textarea
+          id="notes"
+          rows="3"
+          placeholder="Código de pago, observaciones, etc.">
+        </textarea>
+
+      </label>
+
+
+      <button
+        class="primary-btn"
+        type="submit">
+
+        Guardar servicio
+
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+  class="toast"
+  id="toast">
+</div>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
