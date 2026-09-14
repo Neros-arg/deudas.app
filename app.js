@@ -1,5 +1,6 @@
 const KEY = "misServicios_v1";
 
+
 let data =
   JSON.parse(
     localStorage.getItem(KEY) || "[]"
@@ -51,7 +52,7 @@ const fmtDate = date => {
 };
 
 
-/* NOMBRE DEL MES */
+/* MES */
 
 const monthName = date => {
 
@@ -100,7 +101,7 @@ function daysBetween(a, b) {
 }
 
 
-/* PARSEAR FECHA */
+/* FECHA */
 
 function parseDate(value) {
 
@@ -112,6 +113,7 @@ function parseDate(value) {
     value
       .split("-")
       .map(Number);
+
 
   return new Date(
     year,
@@ -188,12 +190,13 @@ function save() {
     JSON.stringify(data)
   );
 
+
   render();
 
 }
 
 
-/* CALCULAR FECHA RECURRENTE */
+/* RECURRENCIA */
 
 function occurrenceDate(
   originalDate,
@@ -219,6 +222,7 @@ function occurrenceDate(
       1
     )
   ) {
+
 
     if (
       repeat === "monthly"
@@ -271,7 +275,7 @@ function occurrenceDate(
 }
 
 
-/* OBTENER SERVICIOS DEL MES */
+/* SERVICIOS */
 
 function getItems() {
 
@@ -338,7 +342,9 @@ function getItems() {
       return {
 
         ...service,
+
         due,
+
         paid
 
       };
@@ -356,7 +362,7 @@ function getItems() {
 }
 
 
-/* RENDERIZAR */
+/* RENDER */
 
 function render() {
 
@@ -374,17 +380,24 @@ function render() {
 
 
   today.setHours(
-    0,0,0,0
+    0,
+    0,
+    0,
+    0
   );
 
 
   let due = 0;
+
   let paid = 0;
+
   let overdue = 0;
+
   let total = 0;
 
 
   items.forEach(service => {
+
 
     if (
       service.paid
@@ -475,6 +488,7 @@ function render() {
   visible.forEach(
     service => {
 
+
       const diff =
         daysBetween(
           service.due,
@@ -491,8 +505,8 @@ function render() {
 
         badge =
           `<span class="badge overdue">
-             Vencido
-           </span>`;
+            Vencido
+          </span>`;
 
       }
 
@@ -566,7 +580,8 @@ function render() {
 
           <button
             class="pay-btn"
-            onclick="markPaid('${service.id}')">
+            onclick="markPaid('${service.id}')"
+          >
 
             ✓ Pagar
 
@@ -597,7 +612,7 @@ function render() {
 }
 
 
-/* SEGURIDAD HTML */
+/* SEGURIDAD */
 
 function escapeHTML(text) {
 
@@ -619,10 +634,11 @@ function escapeHTML(text) {
 }
 
 
-/* MARCAR PAGADO */
+/* PAGADO */
 
 window.markPaid =
 function(id) {
+
 
   const service =
     data.find(
@@ -690,11 +706,12 @@ function(id) {
 };
 
 
-/* ABRIR MODAL */
+/* MODAL */
 
 function openModal(
   service = null
 ) {
+
 
   $("modalBackdrop")
     .classList
@@ -753,6 +770,7 @@ function openModal(
 
 function closeModal() {
 
+
   $("modalBackdrop")
     .classList
     .add("hidden");
@@ -772,6 +790,7 @@ function closeModal() {
 
 function editService(id) {
 
+
   const service =
     data.find(
       item =>
@@ -789,12 +808,13 @@ window.editService =
   editService;
 
 
-/* GUARDAR FORMULARIO */
+/* FORMULARIO */
 
 $("serviceForm")
   .addEventListener(
     "submit",
     event => {
+
 
       event.preventDefault();
 
@@ -805,35 +825,43 @@ $("serviceForm")
 
       const service = {
 
+
         id:
           id ||
           crypto.randomUUID(),
+
 
         name:
           $("name")
             .value
             .trim(),
 
+
         provider:
           $("provider")
             .value
             .trim(),
+
 
         amount:
           Number(
             $("amount").value
           ),
 
+
         dueDate:
           $("dueDate").value,
 
+
         repeat:
           $("repeat").value,
+
 
         notes:
           $("notes")
             .value
             .trim(),
+
 
         paid: false
 
@@ -841,6 +869,7 @@ $("serviceForm")
 
 
       if (id) {
+
 
         const index =
           data.findIndex(
@@ -890,7 +919,7 @@ $("serviceForm")
   );
 
 
-/* BOTÓN AGREGAR */
+/* AGREGAR */
 
 $("addBtn")
   .onclick =
@@ -905,12 +934,13 @@ $("closeModal")
   closeModal;
 
 
-/* CLICK AFUERA */
+/* CLICK FUERA */
 
 $("modalBackdrop")
   .addEventListener(
     "click",
     event => {
+
 
       if (
         event.target ===
@@ -931,9 +961,11 @@ $("prevMonth")
   .onclick =
   () => {
 
+
     viewDate.setMonth(
       viewDate.getMonth() - 1
     );
+
 
     render();
 
@@ -946,9 +978,11 @@ $("nextMonth")
   .onclick =
   () => {
 
+
     viewDate.setMonth(
       viewDate.getMonth() + 1
     );
+
 
     render();
 
@@ -960,6 +994,7 @@ $("nextMonth")
 $("showAllBtn")
   .onclick =
   () => {
+
 
     viewDate =
       new Date();
@@ -988,14 +1023,16 @@ $("settingsBtn")
     );
 
 
-/* NAV */
+/* NAVEGACIÓN */
 
 document
   .querySelectorAll(".nav-item")
   .forEach(button => {
 
+
     button.onclick =
       () => {
+
 
         document
           .querySelectorAll(
@@ -1038,6 +1075,7 @@ document
 /* TOAST */
 
 function toast(message) {
+
 
   const element =
     $("toast");
