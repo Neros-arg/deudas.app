@@ -2,8 +2,18 @@
   "name": "Mis Servicios",
   "short_name": "Servicios",
   "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#080d15",
   "theme_color": "#0b111b",
-  "lang": "es-AR"
+  "lang": "es-AR",
+  "description": "Control personal de servicios, vencimientos y pagos.",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
 }
