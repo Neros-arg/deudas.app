@@ -1,64 +1,137 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
 
-  <meta name="theme-color" content="#0b111b">
+  <meta
+    name="theme-color"
+    content="#0b111b"
+  >
 
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- CONFIGURACIÓN PARA IPHONE -->
+
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
+
+  <meta
+    name="apple-mobile-web-app-title"
+    content="Mis Servicios"
+  >
+
+  <!-- ICONO DE IPHONE -->
+
+  <link
+    rel="apple-touch-icon"
+    href="icon.png"
+  >
+
+  <!-- PWA -->
+
+  <link
+    rel="manifest"
+    href="manifest.json"
+  >
+
+  <!-- CSS -->
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 
   <title>Mis Servicios</title>
 
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
 </head>
+
 
 <body>
 
+
 <div class="app-shell">
 
+
   <!-- HEADER -->
+
   <header class="topbar">
 
     <div>
+
       <div class="eyebrow">
         TU CONTROL, MÁS SIMPLE
       </div>
 
-      <h1>Mis Servicios</h1>
+      <h1>
+        Mis Servicios
+      </h1>
+
     </div>
 
-    <button class="icon-btn" id="settingsBtn">
+
+    <button
+      class="icon-btn"
+      id="settingsBtn"
+      aria-label="Configuración"
+    >
+
       ⚙
+
     </button>
 
   </header>
 
 
+
   <main>
 
+
     <!-- MES -->
+
     <section class="month-nav">
 
-      <button class="month-arrow" id="prevMonth">
+      <button
+        class="month-arrow"
+        id="prevMonth"
+      >
+
         ‹
+
       </button>
+
 
       <strong id="monthLabel"></strong>
 
-      <button class="month-arrow" id="nextMonth">
+
+      <button
+        class="month-arrow"
+        id="nextMonth"
+      >
+
         ›
+
       </button>
 
     </section>
 
 
+
     <!-- ESTADÍSTICAS -->
+
     <section class="stats-grid">
+
 
       <div class="stat-card danger">
 
@@ -71,6 +144,7 @@
         </small>
 
       </div>
+
 
 
       <div class="stat-card success">
@@ -86,6 +160,7 @@
       </div>
 
 
+
       <div class="stat-card neutral">
 
         <span id="overdueCount">
@@ -97,6 +172,7 @@
         </small>
 
       </div>
+
 
 
       <div class="stat-card money">
@@ -111,19 +187,24 @@
 
       </div>
 
+
     </section>
 
 
-    <!-- TÍTULO -->
+
+    <!-- PRÓXIMOS -->
+
     <section class="section-head">
 
       <h2>
         Próximos a pagar
       </h2>
 
+
       <button
         class="link-btn"
-        id="showAllBtn">
+        id="showAllBtn"
+      >
 
         Ver todos
 
@@ -132,25 +213,33 @@
     </section>
 
 
-    <!-- SERVICIOS -->
+
+    <!-- LISTA -->
+
     <section
       id="serviceList"
-      class="service-list">
+      class="service-list"
+    >
     </section>
 
 
-    <!-- VACÍO -->
+
+    <!-- SIN SERVICIOS -->
+
     <div
       id="emptyState"
-      class="empty-state hidden">
+      class="empty-state hidden"
+    >
 
       <div class="empty-icon">
         ✓
       </div>
 
+
       <h3>
         Todo al día
       </h3>
+
 
       <p>
         No tenés servicios pendientes para este período.
@@ -158,17 +247,23 @@
 
     </div>
 
+
   </main>
 
 
-  <!-- NAV INFERIOR -->
+
+  <!-- NAVEGACIÓN -->
+
   <nav class="bottom-nav">
+
 
     <button
       class="nav-item active"
-      data-view="home">
+      data-view="home"
+    >
 
       ⌂
+
       <span>
         Inicio
       </span>
@@ -176,11 +271,14 @@
     </button>
 
 
+
     <button
       class="nav-item"
-      data-view="services">
+      data-view="services"
+    >
 
       ☷
+
       <span>
         Servicios
       </span>
@@ -188,20 +286,25 @@
     </button>
 
 
+
     <button
       class="add-main"
-      id="addBtn">
+      id="addBtn"
+    >
 
       +
 
     </button>
 
 
+
     <button
       class="nav-item"
-      data-view="history">
+      data-view="history"
+    >
 
       ◷
+
       <span>
         Historial
       </span>
@@ -209,40 +312,52 @@
     </button>
 
 
+
     <button
       class="nav-item"
-      data-view="more">
+      data-view="more"
+    >
 
       •••
+
       <span>
         Más
       </span>
 
     </button>
 
+
   </nav>
+
 
 </div>
 
 
-<!-- MODAL AGREGAR SERVICIO -->
+
+<!-- MODAL -->
 
 <div
   class="modal-backdrop hidden"
-  id="modalBackdrop">
+  id="modalBackdrop"
+>
+
 
   <div
     class="modal"
     role="dialog"
-    aria-modal="true">
+    aria-modal="true"
+  >
+
 
     <button
       class="close-btn"
-      id="closeModal">
+      id="closeModal"
+    >
 
       ×
 
     </button>
+
 
 
     <h2 id="modalTitle">
@@ -250,11 +365,15 @@
     </h2>
 
 
+
     <form id="serviceForm">
+
 
       <input
         type="hidden"
-        id="serviceId">
+        id="serviceId"
+      >
+
 
 
       <label>
@@ -264,9 +383,11 @@
         <input
           id="name"
           required
-          placeholder="Ej: Internet">
+          placeholder="Ej: Internet"
+        >
 
       </label>
+
 
 
       <label>
@@ -275,12 +396,15 @@
 
         <input
           id="provider"
-          placeholder="Ej: Personal">
+          placeholder="Ej: Personal"
+        >
 
       </label>
 
 
+
       <div class="two-col">
+
 
         <label>
 
@@ -292,9 +416,11 @@
             min="0"
             step="0.01"
             required
-            placeholder="35000">
+            placeholder="35000"
+          >
 
         </label>
+
 
 
         <label>
@@ -304,11 +430,14 @@
           <input
             id="dueDate"
             type="date"
-            required>
+            required
+          >
 
         </label>
 
+
       </div>
+
 
 
       <label>
@@ -317,29 +446,36 @@
 
         <select id="repeat">
 
+
           <option value="none">
             Una sola vez
           </option>
+
 
           <option value="monthly">
             Mensual
           </option>
 
+
           <option value="bimonthly">
             Cada 2 meses
           </option>
+
 
           <option value="quarterly">
             Trimestral
           </option>
 
+
           <option value="yearly">
             Anual
           </option>
 
+
         </select>
 
       </label>
+
 
 
       <label>
@@ -349,36 +485,46 @@
         <textarea
           id="notes"
           rows="3"
-          placeholder="Código de pago, observaciones, etc.">
-        </textarea>
+          placeholder="Código de pago, observaciones, etc."
+        ></textarea>
 
       </label>
 
 
+
       <button
         class="primary-btn"
-        type="submit">
+        type="submit"
+      >
 
         Guardar servicio
 
       </button>
 
+
     </form>
+
 
   </div>
 
 </div>
 
 
-<!-- TOAST -->
+
+<!-- MENSAJES -->
 
 <div
   class="toast"
-  id="toast">
-</div>
+  id="toast"
+></div>
 
+
+
+<!-- JAVASCRIPT -->
 
 <script src="app.js"></script>
 
+
 </body>
+
 </html>
